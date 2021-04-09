@@ -11,11 +11,11 @@ func calculate(_ args: [String]) -> Int {
             res = num_expr - 1
         } else if operations == "avg" {
             for x in 0...num_expr-2 {
-                res += (Int(args[x]) ?? 0)
+                res += Int(args[x])!
             }
             res = res / (num_expr-1)
         } else if operations == "fact" {
-            let val = Int(args[0]) ?? 0
+            let val = Int(args[0])!
             res = 1
             if val != 0 {
                 for x in 1...abs(val) {
@@ -27,15 +27,15 @@ func calculate(_ args: [String]) -> Int {
             }
         } else {
             if args[1] == "+" {
-                res = (Int(args[0]) ?? 0) + (Int(args[2]) ?? 0)
+                res = Int(args[0])! + Int(args[2])!
             } else if args[1] == "-" {
-                res = (Int(args[0]) ?? 0) - (Int(args[2]) ?? 0)
+                res = Int(args[0])! - Int(args[2])!
             } else if args[1] == "*" {
-                res = (Int(args[0]) ?? 0) * (Int(args[2]) ?? 0)
+                res = Int(args[0])! * Int(args[2])!
             } else if args[1] == "/" {
-                res = (Int(args[0]) ?? 0) / (Int(args[2]) ?? 0)
+                res = Int(args[0])! / Int(args[2])!
             } else if args[1] == "%" {
-                res = (Int(args[0]) ?? 0) % (Int(args[2]) ?? 0)
+                res = Int(args[0])! % Int(args[2])!
             }
         }
     }
@@ -129,11 +129,11 @@ func calculateDoubles(_ args: [String]) -> Double {
             res = Double(num_expr) - 1.0
         } else if operations == "avg" {
             for x in 0...num_expr-2 {
-                res += (Double(args[x]) ?? 0.0)
+                res += Double(args[x])!
             }
             res = res / (Double(num_expr)-1.0)
         } else if operations == "fact" {
-            let val = Double(args[0]) ?? 0.0
+            let val = Double(args[0])!
             res = 1.0
             
             if val != 0.0 {
@@ -146,13 +146,15 @@ func calculateDoubles(_ args: [String]) -> Double {
             }
         } else {
             if args[1] == "+" {
-                res = (Double(args[0]) ?? 0.0) + (Double(args[2]) ?? 0.0)
+                res = Double(args[0])! + Double(args[2])!
             } else if args[1] == "-" {
-                res = (Double(args[0]) ?? 0.0) - (Double(args[2]) ?? 0.0)
+                res = Double(args[0])! - Double(args[2])!
             } else if args[1] == "*" {
-                res = (Double(args[0]) ?? 0.0) * (Double(args[2]) ?? 0.0)
+                res = Double(args[0])! * Double(args[2])!
             } else if args[1] == "/" {
-                res = (Double(args[0]) ?? 0.0) / (Double(args[2]) ?? 0.0)
+                res = Double(args[0])! / Double(args[2])!
+            } else if args[1] == "%" {
+                res = Double(args[0])!.truncatingRemainder(dividingBy: Double(args[2])!)
             }
         }
     }
@@ -174,6 +176,7 @@ calculateDoubles(["12.0", "-", "12.0"]) == 0.0
 calculateDoubles(["2.5", "*", "2.5"]) == 6.25
 calculateDoubles(["2.0", "/", "2.0"]) == 1.0
 calculateDoubles(["2.0", "%", "2.0"]) == 0.0
+calculateDoubles("8.75 % .75") == 0.5
 calculateDoubles("1.0 2.0 3.0 4.0 5.0 count") == 5
 
 calculateDoubles(["-5.0", "fact"]) == -120.0
